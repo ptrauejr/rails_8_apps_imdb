@@ -20,6 +20,16 @@
           %li= link_to "Log In", new_user_session_path
 
       %ul.nav.navbar-nav
+        %li.dropdown
+          %a{ :href => "#", :"data-toggle" => "dropdown", :role => "button", :"aria-expanded" => "false", :class =>"dropdown-toggle"}
+            Sort
+            .span.caret
+          %ul{:class => "dropdown-menu", :role => "menu"}
+            - Category.all.each do |category|
+              %li{:class => ("active" if params[:category] == category.name)}
+                = link_to category.name, plays_path(category: category.name), { :class => "link" }
+
+      %ul.nav.navbar-nav
         - if user_signed_in?
           %li= link_to "Add Play", new_play_path
 
