@@ -22,3 +22,12 @@
     -if @play.user_id == current_user.id
       = link_to "Edit", edit_play_path(@play), class: "btn btn-custom"
       = link_to "Delete", play_path(@play), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-custom"
+
+:javascript
+  $('.review-rating').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
