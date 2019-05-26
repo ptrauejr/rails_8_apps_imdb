@@ -1,6 +1,7 @@
 .row
   .col-md-4
     = image_tag @play.play_img.url(:play_show), class: "play-show"
+
   .col-md-8
     .play-info
       %h2.play-title= @play.title
@@ -8,6 +9,13 @@
         %em From:
         = @play.director
       %h4.play-director= @play.category.name
+      %h4.avg-rating Average Rating
+      .average-review-rating{ "data-score" => @average_review }
+      %span.number-of-reviews
+        %em
+          From
+          = @play.reviews.count
+          reviews
       %p.play-desc= @play.description
 
 .row
@@ -25,6 +33,15 @@
 
 :javascript
   $('.review-rating').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+
+:javascript
+  $('.average-review-rating').raty({
     readOnly: true,
     score: function() {
       return $(this).attr('data-score');
