@@ -4,5 +4,7 @@
 - if @plays.count == 0
   %h3 There are no plays in this category
 -else
-  - @plays.each do |play|
-    %h2= link_to play.title, play_path(play)
+  .row
+    - @plays.each do |play|
+      .col-md-3
+        = link_to image_tag(play.play_img.url(:play_index), class: "play"), play_path(play)
